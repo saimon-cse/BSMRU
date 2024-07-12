@@ -1,0 +1,16 @@
+ $app->bind('path.public',function(){
+	return __DIR__;
+});
+
+
+user name of cpanel: if0_36678530
+hosting account pass: jgdTDCiieC6ho
+
+
+db name: if0_36678530_admin
+
+
+
+db name: id22275006_admin
+db user: id22275006_admin
+pass: @Saimon091

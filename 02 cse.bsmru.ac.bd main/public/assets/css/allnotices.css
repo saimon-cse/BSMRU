@@ -1,0 +1,52 @@
+
+.tbl{
+    width: 100%;
+    text-align: center;
+
+
+}
+td{
+    text-align: center;
+    vertical-align: middle !important;
+    font-size: small;
+    
+}
+.Notice_details{
+    color: #374050;
+    font-weight: 600;
+    text-decoration: none;
+
+}
+
+th{
+    text-align: center;
+    
+    
+}
+
+.container.body-content {
+    margin-top: 50px;
+    
+}
+
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0;
+    width: 100%;
+}
+
+
+
+.pagination {
+    display: flex !important;
+    justify-content: center;
+  }
+  
+  .pagination li {
+    display: block;
+   }
+
+table a:hover{
+    color: #337ab7;
+    text-decoration: underline;
+}
