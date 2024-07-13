@@ -31,12 +31,13 @@ class Role
         // return $next($request);
 
         if (Auth::check()) {
-            if (auth()->user()->role == 'admin') {
+            if (auth()->user()->isApprove == true) {
                 return $next($request);
-            } else if (auth()->user()->role == 'false') {
+            } else if (auth()->user()->isApprove == false) {
                 Auth::logout();
                 return Redirect::route('approval-pending');
             }
+
             else {
                 Auth::logout();
 

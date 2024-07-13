@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::middleware(['auth', 'role:admin'])->group(function(){
+Route::middleware(['auth', 'isApprove:true'])->group(function(){
 
     Route::get('/', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
@@ -254,7 +254,7 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 });
 //end group admin middleware
 
-Route::middleware(['auth', 'role:stuff'])->group(function(){
+Route::middleware(['auth', 'isApprove:stuff'])->group(function(){
 
     Route::get('/stuff/dashboard', [StuffController::class, 'StuffDashboard'])->name('stuff.dashboard');
 }); //end group stuff middleware
