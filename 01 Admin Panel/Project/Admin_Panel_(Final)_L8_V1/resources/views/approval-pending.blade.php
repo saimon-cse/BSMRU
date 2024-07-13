@@ -26,6 +26,7 @@
                             Thank you!</p>
                     </div>
                 </div>
+                <a href="/"> Back to home</a>
             </div>
         </div>
     </div>
