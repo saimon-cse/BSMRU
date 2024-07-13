@@ -196,7 +196,7 @@ class AdminController extends Controller
         // Log user action
         Log::channel('custom_log')->info('AdminNoticeStore: User ID ' . $id . ' added a new notice.');
 
-        return redirect('updatenotice')->with('success', 'Notice Added');
+        return redirect()->route('admin.updatenotice')->with('success', 'Notice Added');
     }
 
 
@@ -256,7 +256,7 @@ class AdminController extends Controller
         // Log user action
         Log::channel('custom_log')->info('AdminNoticeEdited: User ID ' . Auth::user()->user_id . ' edited notice ID ' . $id);
 
-        return redirect('updatenotice')->with('success', 'Notice Edited');
+        return redirect()->route('admin.updatenotice')->with('success', 'Notice Edited');
     }
 
 
@@ -404,7 +404,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to store event.');
         }
 
-        return redirect('events')->with('success', 'Event Added');
+        return redirect()->route('admin.allEvents')->with('success', 'Event Added');
     }
 
     // Edit a single event
@@ -458,7 +458,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to update event.');
         }
 
-        return redirect('events')->with('success', 'Event updated successfully.');
+        return redirect()->route('admin.allEvents')->with('success', 'Event updated successfully.');
     }
 
     // Delete an event
@@ -477,7 +477,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to delete event.');
         }
 
-        return redirect('events')->with('success', 'Event deleted successfully.');
+        return redirect()->route('admin.allEvents')->with('success', 'Event deleted successfully.');
     }
 
 
@@ -574,7 +574,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to store publication.');
         }
 
-        return redirect('admin/publication/all')->with('success', 'Publication added successfully.');
+        return redirect()->route('side.publication')->with('success', 'Publication added successfully.');
     }
 
     // Edit a publication
@@ -613,7 +613,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to update publication.');
         }
 
-        return redirect('admin/publication/all')->with('success', 'Publication updated successfully.');
+        return redirect()->route('side.publication')->with('success', 'Publication updated successfully.');
     }
 
     // Delete a publication
@@ -750,7 +750,7 @@ class AdminController extends Controller
             $education->rank = 1;
             $education->save();
 
-            return redirect('admin/educations')->with('success', 'Education added successfully.');
+            return redirect()->route('ShowAllEducation')->with('success', 'Education added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add education: ' . $e->getMessage());
         }
@@ -908,7 +908,7 @@ class AdminController extends Controller
             $experience->rank = 1;
             $experience->save();
 
-            return redirect('admin/experience/all')->with('success', 'Experience added successfully.');
+            return redirect()->route('ShowAllExperience')->with('success', 'Experience added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add experience ');
         }
@@ -1044,7 +1044,7 @@ class AdminController extends Controller
             $experience->rank = 1;
             $experience->save();
 
-            return redirect('/admin/experience/all')->with('success', 'Other experience added successfully.');
+            return redirect()->route('ShowAllExperience')->with('success', 'Other experience added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add other experience ');
         }
@@ -1080,7 +1080,7 @@ class AdminController extends Controller
             $experience->experience = $req->message;
             $experience->save();
 
-            return redirect('/admin/experience/all')->with('success', 'Other experience updated successfully.');
+            return redirect()->route('ShowAllExperience')->with('success', 'Other experience updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update other experience: ');
         }
@@ -1199,7 +1199,7 @@ class AdminController extends Controller
             $award->rank = 1;
             $award->save();
 
-            return redirect('admin/award')->with('success', 'Award added successfully.');
+            return redirect()->route('ShowAllAward')->with('success', 'Award added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add award: ');
         }
@@ -1237,7 +1237,7 @@ class AdminController extends Controller
             $award->description = $request->description;
             $award->save();
 
-            return redirect('admin/award')->with('success', 'Award updated successfully.');
+            return redirect()->route('ShowAllAward')->with('success', 'Award updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update award: ');
         }
@@ -1356,7 +1356,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Failed to store Research Profile.');
         }
 
-        return redirect('admin/research-profile')->with('success', 'Research Profile added successfully.');
+        return redirect()->route('AllResearchProfile')->with('success', 'Research Profile added successfully.');
     }
 
     public function EditResearcProfile($id)
@@ -1723,7 +1723,7 @@ class AdminController extends Controller
         }
 
         $question->save();
-        return redirect('admin/qustion-papers')->with('success', 'Question paper Added');
+        return redirect()->route('admin.allQuestion')->with('success', 'Question paper Added');
     }
 
 
@@ -1897,7 +1897,7 @@ class AdminController extends Controller
         }
 
         $carousel->save();
-        return redirect('admin/carousel-image-all')->with('success', 'Carousel Image Added');
+        return redirect()->route('admin.carousel-img')->with('success', 'Carousel Image Added');
     }
 
 

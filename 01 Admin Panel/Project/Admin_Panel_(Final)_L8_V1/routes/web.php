@@ -40,9 +40,9 @@ use Illuminate\Support\Str;
 |
 */
 
-Route::get('/', function () {
-    return redirect('admin/dashboard');
-});
+// Route::get('/', function () {
+//     return redirect('admin/dashboard');
+// });
 
 Route::get('/approval-pending', function () {
     if(Auth::check()) return redirect('/');
@@ -66,10 +66,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function(){
 
-    Route::get('admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     //profile
-    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    Route::get('profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::post('admin/passwordupdate', [AdminController::class, 'AdminUpdatePassword'])->name('admin.password.store');
@@ -78,9 +78,9 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     //Notice
     Route::get('addnotice', [AdminController::class, 'AdminAddNotice'])->name('admin.addnotice');
     Route::post('notice/store', [AdminController::class, 'AdminNoticeStore'])->name('admin.notice.store');
-    Route::get('updatenotice', [AdminController::class, 'AdminNoticeUpdate'])->name('admin.updatenotice');
-    Route::get('notice/{id}', [AdminController::class, 'AdminEditNotice'])->name('admin.editnotice');
-    Route::post('admin/edited/{id}', [AdminController::class, 'AdminNoticeEdited'])->name('admin.notice.edited');
+    Route::get('notices', [AdminController::class, 'AdminNoticeUpdate'])->name('admin.updatenotice');
+    Route::get('notice/{id}/edit', [AdminController::class, 'AdminEditNotice'])->name('admin.editnotice');
+    Route::post('notices/edited/{id}', [AdminController::class, 'AdminNoticeEdited'])->name('admin.notice.edited');
     Route::get('notice/detete/{id}', [AdminController::class, 'NoticeDelete'])->name('admin.noticedelete');
     //notice Ranking
     Route::get('admin/notices/{id}/up', [AdminController::class, 'noticeRankUp'])->name('admin.noticeRankup');
@@ -94,19 +94,19 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('addEvents', [AdminController::class, 'AddEvent'])->name('admin.addevent');
     Route::post('admin/event/store', [AdminController::class, 'AdminEventStore'])->name('admin.event.store');
     Route::get("events", [AdminController::class, 'allEvents'])->name('admin.allEvents');
-    Route::get("events/{id}", [AdminController::class, 'editEvents'])->name('editEvent');
+    Route::get("events/{id}/edit", [AdminController::class, 'editEvents'])->name('editEvent');
     Route::post("event/edited/{id}", [AdminController::class, 'editedEvent'])->name('admin.event.edited');
     Route::get('event/delete/{id}', [AdminController::class, 'deleteEvent'])->name('deleteEvent');
 
 
 
     //publications
-    Route::get('admin/publication/new', [AdminController::class, 'newPublication'])->name('admin.newPublication');
-    Route::post('admin/publications', [AdminController::class, 'publicationStore'])->name('admin.publication.store');
+    Route::get('publication/new', [AdminController::class, 'newPublication'])->name('admin.newPublication');
+    Route::post('admin/publications/store', [AdminController::class, 'publicationStore'])->name('admin.publication.store');
     // delete publication
    Route::get('admin/publication/delete/{id}', [AdminController::class, 'PublicationDelete'])->name('admin.publication.delete');
     // edit view publication
-    Route::get('admin/publications/{id}',[AdminController::class, 'AdminPublicationEdit'])->name('admin.publication.edit');
+    Route::get('publications/{id}',[AdminController::class, 'AdminPublicationEdit'])->name('admin.publication.edit');
     // store the edited publication
     Route::post('admin/publication/update/{id}', [AdminController::class, 'PublicationEidited'])->name('publicationUpdate');
 
@@ -120,35 +120,35 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     //Carousel Images
     // Route::get('admin/carousel', [AdminController::class, 'CarouselShow'])->name('admin.carousel');
 
-    Route::get('admin/carousel', [AdminController::class, 'CarouselShow'])->name('images.form');
+    Route::get('carousel', [AdminController::class, 'CarouselShow'])->name('images.form');
     Route::post('admin/images/update', [AdminController::class, 'updateImages'])->name('image.update');
 
 
 
     //side bar publication
-    Route::get('admin/publication/all',[AdminController::class, 'AllPublication'])->name('side.publication');
+    Route::get('publications',[AdminController::class, 'AllPublication'])->name('side.publication');
 
 
 
 
     //Education
-    Route::get('admin/education/add', [AdminController::class, 'AddEducation'])->name('addEducation');
+    Route::get('education/add', [AdminController::class, 'AddEducation'])->name('addEducation');
     Route::post('admin/education/store', [AdminController::class, 'StoreEducation'])->name('StoreEducation');
-    Route::get('admin/educations', [AdminController::class, 'ShowAllEducation'])->name('ShowAllEducation');
-    Route::get('admin/educations/{id}', [AdminController::class, 'EditEducation'])->name('EditEducation');
+    Route::get('educations', [AdminController::class, 'ShowAllEducation'])->name('ShowAllEducation');
+    Route::get('educations/{id}', [AdminController::class, 'EditEducation'])->name('EditEducation');
     Route::get('admin/education/edited/{id}',[AdminController::class, 'EditedEducation'])->name('EditedEducation');
     Route::get('admin/education/delete/{id}', [AdminController::class, 'DeleteEducation'])->name('DeleteEducation');
 
     //Experience
-    Route::get('admin/experience/add', [AdminController::class, 'AddExperience'])->name('addExperience');
+    Route::get('experience/add', [AdminController::class, 'AddExperience'])->name('addExperience');
     Route::post('admin/experiencess/store', [AdminController::class, 'StoreExperience'])->name('StoreExperience');
-    Route::get('admin/experience/all', [AdminController::class, 'ShowAllExperience'])->name('ShowAllExperience');
-    Route::get('admin/experiences/{id}', [AdminController::class, 'EditExperience'])->name('EditExperience');
+    Route::get('experience', [AdminController::class, 'ShowAllExperience'])->name('ShowAllExperience');
+    Route::get('experiences/{id}', [AdminController::class, 'EditExperience'])->name('EditExperience');
     Route::get('admin/experience/edited/{id}',[AdminController::class, 'EditedExperience'])->name('EditedExperience');
     Route::get('admin/experience/delete/{id}', [AdminController::class, 'DeleteExperience'])->name('DeleteExperience');
-    Route::get('admin/experience/other', [AdminController::class, 'OtherExperience'])->name('addOtherExperience');
+    Route::get('experience/other', [AdminController::class, 'OtherExperience'])->name('addOtherExperience');
     Route::post('admin/experience/others', [AdminController::class, 'StoreOtherExperience'])->name('storeProffExperience');
-    Route::get('admin/experience/other/{id}', [AdminController::class, 'SingleOtherExperience'])->name('singleOtherExperience');
+    Route::get('other-experience/{id}', [AdminController::class, 'SingleOtherExperience'])->name('singleOtherExperience');
     Route::post('admin/experience/others/{id}', [AdminController::class, 'OtherExperienceEdited'])->name('OtherExperienceEdited');
     Route::get('admin/experience/otherss/delete/{id}', [AdminController::class, 'OtherExperiencedelete'])->name('OtherExperiencedelete');
 
@@ -156,19 +156,19 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     // if(Auth::user()->controller_role == 'staff') return back()->with('error', 'Invalid link!');
 
     //award
-    Route::get('admin/award/add', [AdminController::class, 'AddAward'])->name('addAward');
+    Route::get('award/add', [AdminController::class, 'AddAward'])->name('addAward');
     Route::post('admin/awards', [AdminController::class, 'StoreAward'])->name('StoreAward');
-    Route::get('admin/award', [AdminController::class, 'ShowAllAward'])->name('ShowAllAward');
-    Route::get('admin/awards/{id}', [AdminController::class, 'EditAward'])->name('EditAward');
+    Route::get('award', [AdminController::class, 'ShowAllAward'])->name('ShowAllAward');
+    Route::get('awards/{id}', [AdminController::class, 'EditAward'])->name('EditAward');
     Route::get('admin/award/edited/{id}',[AdminController::class, 'EditedAward'])->name('EditedAward');
     Route::get('admin/award/delete/{id}', [AdminController::class, 'DeleteAward'])->name('DeleteAward');
 
 
     // Rsearch Profile
-    Route::get('admin/research-profile',[AdminController::class, 'AllResearchProfile'])->name('AllResearchProfile');
-    Route::get('admin/research-profile/add',[AdminController::class, 'AddResearchProfile'])->name('AddResearchProfile');
+    Route::get('research-profile',[AdminController::class, 'AllResearchProfile'])->name('AllResearchProfile');
+    Route::get('research-profile/add',[AdminController::class, 'AddResearchProfile'])->name('AddResearchProfile');
     Route::post('admin/research-profiles',[AdminController::class, 'StoreResearchProfile'])->name('StoreResearchProfile');
-    ROute::get('admin/research-profile/{id}', [AdminController::class, 'EditResearcProfile'])->name('EditResearcProfile');
+    ROute::get('research-profile/{id}', [AdminController::class, 'EditResearcProfile'])->name('EditResearcProfile');
     ROute::post('admin/research-profiles/{id}', [AdminController::class, 'EditedResearcProfile'])->name('EditedResearcProfile');
     ROute::get('admin/research-profiless/{id}', [AdminController::class, 'DeleteResearchProfile'])->name('DeleteResearchProfile');
 
@@ -223,29 +223,29 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 
 
 
-    Route::get('admin/question-add', [AdminController::class, 'AddQuestionBank'])->name('admin.questionBank.show');
+    Route::get('question-add', [AdminController::class, 'AddQuestionBank'])->name('admin.questionBank.show');
     Route::post('admin/question-adds', [AdminController::class, 'StoreQuestionBank'])->name('admin.questionBank.store');
-    Route::get('admin/qustion-papers', [AdminController::class, 'AllQuestion'])->name('admin.allQuestion');
-    Route::get('admin/question-paper/{id}',[AdminController::class, 'QuestionEdit'])->name('admin.question.edit');
+    Route::get('qustion-papers', [AdminController::class, 'AllQuestion'])->name('admin.allQuestion');
+    Route::get('question-paper/{id}',[AdminController::class, 'QuestionEdit'])->name('admin.question.edit');
     Route::post('admin/question-paperss/{id}', [AdminController::class, 'QuestionEdited'])->name('admin.question.edited');
     Route::get('admin/question-delete/{id}',[AdminController::class, 'QuestionDelete'])->name('admin.question.delete');
 
 
-    Route::get('admin/carousel-image-all',[AdminController::class, 'CarouselAll'])->name('admin.carousel-img');
-    Route::get('admin/carousel-image-add',[AdminController::class, 'CarouselAdd'])->name('admin.carousel-img.add');
+    Route::get('carousel-image-all',[AdminController::class, 'CarouselAll'])->name('admin.carousel-img');
+    Route::get('carousel-image-add',[AdminController::class, 'CarouselAdd'])->name('admin.carousel-img.add');
     Route::post('admin/carousel-img-store', [AdminController::class, 'CarouselStore'])->name('admin.carousel-img.store');
-    Route::get('admin/carousel-image-edit/{id}',[AdminController::class, 'CarouselEdit'])->name('admin.carousel-img.edit');
+    Route::get('carousel-image-edit/{id}',[AdminController::class, 'CarouselEdit'])->name('admin.carousel-img.edit');
     Route::post('admin/carousel-img-edited/{id}',[AdminController::class, 'CarouselEdited'])->name('admin.carousel-edited');
     Route::get('admin/carousel-delete/{id}',[AdminController::class, 'CarouselDelete'])->name('admin.carousel-img-delete');
     Route::get('admin/carousel-rank-up/{id}',[AdminController::class, 'CarouselRankUp'])->name('admin.carousel-rank-up');
     Route::get('admin/carousel-rankDown/{id}',[AdminController::class, 'CarouselRankDown'])->name('admin.carousel-rank-down');
 
 
-    Route::get('admin/dept_info',[AdminController::class, 'DeptInfo'])->name('DeptInfo');
+    Route::get('dept_info',[AdminController::class, 'DeptInfo'])->name('DeptInfo');
     Route::post('admin/dept_infos/{id}',[AdminController::class, 'DeptInfoStore'])->name('DeptInfoStore');
 
 
-    Route::get('stuff/Password_reset',[AdminController::class, 'StuffPasswordUpdate'])->name('stuff.passwordUpdate');
+    Route::get('Password_reset',[AdminController::class, 'StuffPasswordUpdate'])->name('stuff.passwordUpdate');
 
     //Experiences
     // Route::get('admin/experience/add', [AdminController::class, 'AddExperience'])->name('addExperience');
