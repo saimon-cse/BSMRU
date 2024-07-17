@@ -25,7 +25,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.question.edited', ['id'=>$question->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.question.edited', ['id'=>$question->id]) }}" enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                     @csrf
 
                     <div class="row mb-3">
@@ -55,8 +55,8 @@
                         <label for="semester" class="col-sm-2 col-form-label">Semester</label>
                         <div class="col-sm-2">
                             <select class="form-select" name="semester" aria-label="Select Semester">
-                                <option value="Semester-I" @if( $question->semester=='Semester-I') selected @endif>Semester-I</option>
-                                <option value="Semester-II" @if( $question->semester=='Semester-II') selected @endif>Semester-II</option>
+                                <option value="Semester-1" @if( $question->semester=='Semester-1') selected @endif>Semester-1</option>
+                                <option value="Semester-2" @if( $question->semester=='Semester-2') selected @endif>Semester-2</option>
                             </select>
                         </div>
                     </div>

@@ -23,20 +23,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                {{-- <a href="{{ route('ShowAllAward') }}" class="btn btn-success"
-                    style="width: 150px; margin-left:20px; margin-bottom:20px">See Awards
-                </a>
 
-                <br> --}}
-                <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        Failed to upload Notice
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div> -->
-
-
-                {{-- {{route('addEducations')}} --}}
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('StoreAward') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('StoreAward') }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         {{-- <label for="inputEmail3" class="col-sm-2 col-form-label">Degree</label> --}}
@@ -72,25 +61,14 @@
                     <div class="row mb-3">
                         {{-- <label for="inputEmail3" class="col-sm-2 col-form-label">Passing Year</label> --}}
                         <div class="col-sm-10">
-                            <input type=" text" class="form-control" id="inputText" name="description"
+                            <input type="text" class="form-control" id="inputText" name="description"
                                 placeholder="Description" required>
                         </div>
                     </div>
 
                     <input type="hidden" name="user" id="" value="{{$profileData->user_id}}">
 
-                    {{-- <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
-                  <div class="col-sm-10">
-                  <textarea  class="form-control" name="not_des" id="about" style="height: 100px" placeholder="Notice Description"></textarea>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Attachment</label>
-                  <div class="col-sm-10">
-                  <div class="col-sm-12"><input class="form-control" type="file" id="formFile" name='not_file' require></div>
-                  </div>
-                </div> --}}
+
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>

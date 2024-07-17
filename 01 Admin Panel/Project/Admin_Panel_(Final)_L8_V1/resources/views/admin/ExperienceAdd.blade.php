@@ -35,7 +35,7 @@
 
                 {{-- {{route('addEducations')}} --}}
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('StoreExperience') }}" enctype="multipart/form-data">
+                <form method="POST" onsubmit="sanitizeInputs()" action="{{ route('StoreExperience') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         {{-- <label for="inputEmail3" class="col-sm-2 col-form-label">Degree</label> --}}

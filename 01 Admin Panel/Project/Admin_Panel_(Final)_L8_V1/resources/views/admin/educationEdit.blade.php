@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-                <form action="{{ route('EditedEducation', ['id' => $education->id]) }}">
+                <form action="{{ route('EditedEducation', ['id' => $education->id]) }}" onsubmit="sanitizeInputs()">
                     @csrf
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Degree</label>

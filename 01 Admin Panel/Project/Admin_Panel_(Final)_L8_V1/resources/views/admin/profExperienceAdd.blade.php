@@ -31,7 +31,7 @@
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('profExperienceAdd') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('profExperienceAdd') }}" enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                     @csrf
 
                     <div class="row mb-3">

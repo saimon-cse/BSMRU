@@ -215,6 +215,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('admin.specialNews') }}">
+                    <i class=" bi bi-newspaper"></i>
+                    <span>Special Event</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('DeptInfo') }}">
                     <i class="ri-coin-line"></i>
                     <span>Dept Attributes</span>

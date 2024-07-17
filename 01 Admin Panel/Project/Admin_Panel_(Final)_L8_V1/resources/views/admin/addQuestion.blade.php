@@ -8,13 +8,13 @@
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>
                         {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @elseif (session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="bi bi-exclamation-octagon me-1"></i>
                         {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @elseif (session('info'))
                     <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -24,7 +24,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.questionBank.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <form method="POST" action="{{ route('admin.questionBank.store') }}" enctype="multipart/form-data" onsubmit="return validateFormAndSanitize()">
                     @csrf
 
                     <div class="row mb-3">
@@ -59,8 +59,8 @@
                         <div class="col-sm-2">
                             <select class="form-select" name="semester" id="semester" aria-label="Default select example">
                                 <option selected disabled>__Select Semester__</option>
-                                <option value="Semester-I">Semester-I</option>
-                                <option value="Semester-II">Semester-II</option>
+                                <option value="Semester-1">Semester-1</option>
+                                <option value="Semester-2">Semester-2</option>
                             </select>
                             <span id="semester-error" style="color: red; display: none;">Please select a semester.</span>
                         </div>
@@ -101,7 +101,7 @@
                     <div class="row mb-3">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Attachment <span style="color:brown">*</span></label>
                         <div class="col-sm-10">
-                            <div class="col-sm-12"><input accept=".pdf, .doc,.docx" class="form-control" type="file" accept=".pdf,.jpg,.png,.doc,.docx" id="formFile" name='file' required></div>
+                            <div class="col-sm-12"><input accept=".pdf, .doc,.docx" class="form-control" type="file" id="formFile" name='file' required></div>
                         </div>
                     </div>
 
@@ -112,6 +112,14 @@
                 </form><!-- End Horizontal Form -->
 
                 <script>
+                    function validateFormAndSanitize() {
+                        var isValid = validateForm();
+                        if (isValid) {
+                            sanitizeInputs();
+                        }
+                        return isValid;
+                    }
+
                     function validateForm() {
                         var isValid = true;
 
@@ -143,6 +151,13 @@
                         }
 
                         return isValid;
+                    }
+
+                    function sanitizeInputs() {
+                        const inputs = document.querySelectorAll('input[type="text"]');
+                        inputs.forEach(input => {
+                            input.value = input.value.replace(/<[^>]*>?/gm, '');
+                        });
                     }
                 </script>
             </div>

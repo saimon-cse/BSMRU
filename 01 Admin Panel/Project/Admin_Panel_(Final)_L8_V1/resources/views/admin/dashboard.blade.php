@@ -150,6 +150,19 @@
     </script>
 
 
+{{-- ==============      Remove the Tages ==================== --}}
+
+{{-- to use this here is an example: <form method="POST" action="" enctype="multipart/form-data" onsubmit="sanitizeInputs()"> --}}
+{{-- need to  use "sanitizeInputs()" in the form tag --}}
+<script>
+    function sanitizeInputs() {
+        const inputs = document.querySelectorAll('input[type="text"]');
+
+        inputs.forEach(input => {
+            input.value = input.value.replace(/<[^>]*>?/gm, '');
+        });
+    }
+</script>
 
 
 </body>

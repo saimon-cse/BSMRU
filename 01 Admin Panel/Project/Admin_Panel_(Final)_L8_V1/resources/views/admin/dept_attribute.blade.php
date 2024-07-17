@@ -31,7 +31,7 @@
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('DeptInfoStore', ['id' => $dept->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('DeptInfoStore', ['id' => $dept->id]) }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-3">

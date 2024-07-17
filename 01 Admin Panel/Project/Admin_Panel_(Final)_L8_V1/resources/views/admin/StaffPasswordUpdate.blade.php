@@ -32,7 +32,7 @@
                     <div class="row mb-3">
                         <label class="col-md-4 col-lg-3 col-form-label" for="email">Email</label>
                         <div class="col-md-8 col-lg-9">
-                            <input type="text" class="form-control" value="{{ $profileData->email }}" disabled=""
+                            <input type="text" class="form-control" value="{{ $profileData->email }}" disabled
                                 id="email">
                         </div>
                     </div>

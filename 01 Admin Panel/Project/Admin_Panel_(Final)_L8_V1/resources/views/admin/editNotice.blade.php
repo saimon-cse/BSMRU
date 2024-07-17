@@ -32,7 +32,7 @@
 
                 <!-- Horizontal Form -->
                 <form method="POST" action="{{ route('admin.notice.edited', ['id' => $notice->id]) }}"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                     @csrf
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Notice Date <span style="color:brown">*</span></label>

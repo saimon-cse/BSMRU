@@ -149,7 +149,7 @@
 
                                     <!-- Profile Edit Form -->
                                     <form method="POST" action="{{ route('admin.profile.store') }}"
-                                        enctype="multipart/form-data">
+                                        enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                                         @csrf
                                         <div class="row mb-3">
                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile

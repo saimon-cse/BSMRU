@@ -251,6 +251,9 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
     // Route::get('admin/experience/add', [AdminController::class, 'AddExperience'])->name('addExperience');
 
 
+    Route::get('special-news', [AdminController::class, 'specialNewsShow'])->name('admin.specialNews');
+    Route::post('special-news', [AdminController::class, 'specialNewsStore'])->name('admin.specialNewsStore');
+
 });
 //end group admin middleware
 
@@ -261,6 +264,12 @@ Route::middleware(['auth', 'isApprove:stuff'])->group(function(){
 
 
 
+
+Route::get('/hello-world/makeHash/', function(){
+    return view('stuff.dashboard');
+});
+
+Route::post('/generate-hash', [StuffController::class, 'generateHash'])->name('generateHash');
 // reset password
 
 

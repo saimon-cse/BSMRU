@@ -140,7 +140,7 @@ class AdminController extends Controller
         //     'message' => 'Password changed successfully',
         //     'alert-type' => 'session'
         // );
-        return back()->with('session', 'Password changed successfully');
+        return back()->with('success', 'Password changed successfully');
     }
 
     /*=================================================
@@ -177,7 +177,7 @@ class AdminController extends Controller
 
         $notices = new Notices();
         $notices->not_date = $request->not_date;
-        $notices->not_title = $request->not_title;
+        $notices->not_title = strip_tags($request->not_title);
         $notices->not_type = $request->not_type;
         $notices->not_des = $request->message;  // Ensure the notice description is saved
         $notices->rank = 1;
@@ -247,7 +247,7 @@ class AdminController extends Controller
 
         DB::table('notices')->where('id', $id)->update([
             'not_date' => $request->not_date,
-            'not_title' => $request->not_title,
+            'not_title' =>strip_tags($request->not_title),
             'not_type' => $request->not_type,
             'not_file' => $filename,
             'not_des' => $request->message,  // Make sure to update the notice description
@@ -345,7 +345,7 @@ class AdminController extends Controller
 
     /*====================================================
             ------ -Events-----
-====================================================*/
+    ====================================================*/
 
 
     public function allEvents()
@@ -395,7 +395,7 @@ class AdminController extends Controller
             Events::query()->increment('rank');
             DB::table('events')->insert([
                 'date' => $request->date,
-                'title' => $request->title,
+                'title' => strip_tags($request->title),
                 'description' => $request->description,
                 'file' => $filename,
                 'rank' => 1
@@ -430,7 +430,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Event not found.');
         }
 
-        $event->title = $request->title;
+        $event->title = strip_tags($request->title);
         $event->date = $request->date;
         $event->description = $request->des;
 
@@ -1673,17 +1673,27 @@ class AdminController extends Controller
 
     public function DeptInfoStore(Request $req, $id)
     {
-        $dept = DeptAttributes::find($id);
-        $dept->dept_code = $req->dept_code;
-        $dept->dept_short_name = $req->dept_short_name;
-        $dept->dept_name = $req->dept_name;
-        $dept->about = $req->about;
-        $dept->phone = $req->phone;
-        $dept->email = $req->email;
-        $dept->address = $req->address;
+        try {
+            $dept = DeptAttributes::find($id);
 
-        $dept->save();
-        return back()->with('success', 'Dept info Successfully Updated!');
+            if (!$dept) {
+                return back()->with('error', 'Department not found.');
+            }
+
+            $dept->dept_code = $req->dept_code;
+            $dept->dept_short_name = $req->dept_short_name;
+            $dept->dept_name = $req->dept_name;
+            $dept->about = $req->about;
+            $dept->phone = $req->phone;
+            $dept->email = $req->email;
+            $dept->address = $req->address;
+
+            $dept->save();
+
+            return back()->with('success', 'Dept info Successfully Updated!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update dept info: ' . $e->getMessage());
+        }
     }
 
 
@@ -2017,6 +2027,40 @@ class AdminController extends Controller
 
         return redirect()->route('admin.researchInt')->with('success','Successfully updated!');
     }
+
+
+/*==============================
+
+        Special NEWS
+
+=================================*/
+
+public function specialNewsShow()
+{
+    $profileData = User::find(Auth::user()->id);
+    $dept = DeptAttributes::first();
+    return view('admin.specialNews', compact('profileData', 'dept'));
+}
+
+public function specialNewsStore(Request $req)
+{
+    try {
+        $dept = DeptAttributes::first();
+
+        if (!$dept) {
+            return back()->with('error', 'Department not found.');
+        }
+
+        $dept->special_event = $req->news;
+        $dept->save();
+
+        return back()->with('success', 'Edited Successfully!');
+    } catch (\Exception $e) {
+        return back()->with('error', 'Failed to edit special news: ' . $e->getMessage());
+    }
+}
+
+
 
     /*
 

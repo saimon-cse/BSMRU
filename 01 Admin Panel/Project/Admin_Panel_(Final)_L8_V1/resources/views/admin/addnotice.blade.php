@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('admin.notice.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.notice.store') }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Notice Date <span style="color:brown">*</span></label>

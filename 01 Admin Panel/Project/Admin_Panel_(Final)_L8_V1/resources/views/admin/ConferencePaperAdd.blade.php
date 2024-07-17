@@ -31,7 +31,7 @@
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('newConferencePaper.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('newConferencePaper.store') }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-3">

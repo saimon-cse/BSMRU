@@ -32,7 +32,7 @@
 
                 <!-- Horizontal Form -->
                 <form method="POST" action="{{ route('OtherExperienceEdited', ['id' => $experience->id]) }}"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                     @csrf
 
                     <div class="row mb-3">
