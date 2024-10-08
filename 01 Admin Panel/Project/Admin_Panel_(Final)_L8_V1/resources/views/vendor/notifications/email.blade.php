@@ -2,6 +2,11 @@
 {{-- Greeting --}}
 {{-- <img src="{{ asset('assets/img/bsmru_logo.png') }}" style="height: 100px;" class="logo" alt="Custom Logo"> --}}
 
+@php
+
+$hi = "New";
+@endphp
+
 @if (! empty($greeting))
 {{-- # {{ $greeting }} --}}
 @else

@@ -1,6 +1,19 @@
+
+@section('title', 'Manage Notices')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Notices</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" >Notices</li>
+                    {{-- <li class="breadcrumb-item active">Profile</li> --}}
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">All Notices</h5>
@@ -47,17 +60,23 @@
                                 <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $notice->not_date)->format('j M Y') }}</td>
                                 <td><a href="{{ $dept->dept_url.'/assets/Files/'.$notice->not_file }}"><strong>[view]</strong></a> </td>
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('admin.editnotice', ['id' => $notice->id]) }}"><i
+                                    <a class="btn btn-info btn-sm" href="{{ route('notice.show', ['notice' => $notice->id]) }}"><i
                                             class="bx bxs-edit"></i></a>
-                                    <a class="btn btn-success"
-                                        href="{{ route('admin.noticeRankup', ['id' => $notice->id]) }}"><i
+                                    <a class="btn btn-success btn-sm"
+                                        href="{{ route('notice.rankUp', ['id' => $notice->id]) }}"><i
                                             class="bx bxs-upvote"></i></a>
-                                    <a class="btn btn-primary"
-                                        href="{{ route('admin.noticeRankDown', ['id' => $notice->id]) }}"><i
+                                    <a class="btn btn-primary btn-sm"
+                                        href="{{ route('notice.rankDown', ['id' => $notice->id]) }}"><i
                                             class="bx bxs-downvote"></i></a>
-                                    <a class="delete-link btn btn-danger"
-                                        href="{{ route('admin.noticedelete', ['id' => $notice->id]) }}"><i
-                                            class="bx bxs-trash"></i></a>
+
+                                    <form action="{{ route('notice.destroy', $notice->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this notice?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bx bxs-trash"></i>
+                                        </button>
+                                    </form>
+
                                 </td>
 
                             </tr>

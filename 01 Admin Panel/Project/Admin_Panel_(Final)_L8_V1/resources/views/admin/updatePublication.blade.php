@@ -1,9 +1,12 @@
+
+@section('title', 'Update Publication')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Update Publication</h5>
+                <h5 class="card-title">Edit Publication</h5>
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-1"></i>
@@ -30,11 +33,24 @@
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('publicationUpdate', ['id' => $publication->id]) }}"
+                <form method="POST" action="{{ route('publications.update', ['publication' => $publication->id]) }}"
                     enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="row mb-3">
+                        {{-- <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <select class="form-select" name="paperType" aria-label="Default select example" >
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->title }}">{{ $type->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <br> --}}
+
                         <div class="col-md-8 col-lg-9">
                             <!-- Quill Editor Default -->
                             <div class="form-group mb-4">

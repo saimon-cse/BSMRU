@@ -1,9 +1,26 @@
+
+@section('title', 'Manage Award')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Awards</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    {{-- <li class="breadcrumb-item">Awards</li> --}}
+                    <li class="breadcrumb-item active">Awards</li>
+                </ol>
+            </nav>
+            <a href="{{ route('addAward') }}" class="btn btn-success"
+                    style="width: 150px;  margin-bottom:20px">Add Award
+                </a>
+
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Awards</h5>
+                <h5 class="card-title">All Awards</h5>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>
@@ -23,11 +40,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <a href="{{ route('addAward') }}" class="btn btn-success"
-                    style="width: 150px; margin-left:20px; margin-bottom:20px">Add Award
-                </a>
-
-                <br>
 
                 <!-- Table with hoverable rows -->
                 <table class="table table-hover">
@@ -56,13 +68,13 @@
 
 
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('EditAward', ['id' => $award->id]) }}"><i
+                                    <a class="btn btn-sm btn-info" href="{{ route('EditAward', ['id' => $award->id]) }}"><i
                                             class="bx bxs-edit"></i></a>
-                                    <a class="delete-link btn btn-danger" href="{{ route('DeleteAward', ['id' => $award->id]) }}"><i
+                                    <a class="delete-link btn btn-sm btn-danger" href="{{ route('DeleteAward', ['id' => $award->id]) }}"><i
                                             class="bx bxs-trash"></i></a>
-                                    <a class="btn btn-success" href="{{ route('admin.AwardRankup', ['id' => $award->id]) }}"><i
+                                    <a class="btn btn-sm btn-success" href="{{ route('admin.AwardRankup', ['id' => $award->id]) }}"><i
                                             class="bx bxs-upvote"></i></a>
-                                    <a class="btn btn-primary" href="{{ route('admin.AwardRankDown', ['id' => $award->id]) }}"><i
+                                    <a class="btn btn-sm btn-primary" href="{{ route('admin.AwardRankDown', ['id' => $award->id]) }}"><i
                                             class="bx bxs-downvote"></i></a>
                                 </td>
                             </tr>

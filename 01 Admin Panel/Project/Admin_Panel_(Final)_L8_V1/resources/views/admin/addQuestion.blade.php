@@ -1,6 +1,19 @@
+@section('title', 'Add Questions')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Question Papers</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Academic</li>
+                    <li class="breadcrumb-item">Question</li>
+                    <li class="breadcrumb-item active">Add</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Question Papers</h5>
@@ -24,7 +37,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.questionBank.store') }}" enctype="multipart/form-data" onsubmit="return validateFormAndSanitize()">
+                <form method="POST" action="{{ route('questionPaper.store') }}" enctype="multipart/form-data" onsubmit="return validateFormAndSanitize()">
                     @csrf
 
                     <div class="row mb-3">

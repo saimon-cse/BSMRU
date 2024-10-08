@@ -1,33 +1,44 @@
+@section('title', 'Manage Education')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Education</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    {{-- <li class="breadcrumb-item">Education</li> --}}
+                    <li class="breadcrumb-item active">Education</li>
+                </ol>
+            </nav>
+            <a href="{{ route('addEducation') }}" class="btn btn-success" style="width: 150px; margin-bottom:20px">Add
+                Education
+            </a>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Education</h5>
                 @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="bi bi-check-circle me-1"></i>
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
-                </div>
-            @elseif (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-octagon me-1"></i>
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
-                </div>
-            @elseif (session('info'))
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <i class="bi bi-info-circle me-1"></i>
-                    {{ session('info') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-                <a href="{{ route('addEducation') }}" class="btn btn-success"
-                    style="width: 150px; margin-left:20px; margin-bottom:20px">Add Education
-                </a>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle me-1"></i>
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-octagon me-1"></i>
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"aria-label="Close"></button>
+                    </div>
+                @elseif (session('info'))
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <i class="bi bi-info-circle me-1"></i>
+                        {{ session('info') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
-                <br>
 
                 <!-- Table with hoverable rows -->
                 <table class="table table-hover">
@@ -53,13 +64,16 @@
 
 
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('EditEducation', ['id' => $education->id]) }}"><i
+                                    <a class="btn btn-sm btn-info" href="{{ route('EditEducation', ['id' => $education->id]) }}"><i
                                             class="bx bxs-edit"></i></a>
-                                    <a  class="delete-link btn btn-danger" href="{{ route('DeleteEducation', ['id' => $education->id]) }}"><i
+                                    <a class="delete-link btn btn-sm btn-danger"
+                                        href="{{ route('DeleteEducation', ['id' => $education->id]) }}"><i
                                             class="bx bxs-trash"></i></a>
-                                    <a class="btn btn-success" href="{{ route('admin.EducationRankup', ['id' => $education->id]) }}"><i
+                                    <a class="btn btn-sm btn-success"
+                                        href="{{ route('admin.EducationRankup', ['id' => $education->id]) }}"><i
                                             class="bx bxs-upvote"></i></a>
-                                    <a class="btn btn-primary" href="{{ route('admin.EducationRankDown', ['id' => $education->id]) }} "><i
+                                    <a class="btn btn-sm btn-primary"
+                                        href="{{ route('admin.EducationRankDown', ['id' => $education->id]) }} "><i
                                             class="bx bxs-downvote"></i></a>
                                 </td>
 

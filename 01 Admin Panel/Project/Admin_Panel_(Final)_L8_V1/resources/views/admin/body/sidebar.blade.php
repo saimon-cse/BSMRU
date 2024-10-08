@@ -3,24 +3,24 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('admin.dashboard') }}">
+            <a class="nav-link {{url()->current() == route('admin.dashboard') ? '' : 'collapsed'}}" href="{{route('admin.dashboard')}}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
-        @if ($profileData->controller_role != 'Teacher')
+        @if ($profileData->controller_role != 'General')
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link {{(url()->current() == route('notice.create') || url()->current() == route('notice.index')) ? '' : 'collapsed'}}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Notice</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="components-nav" class="nav-content {{(url()->current() == route('notice.create') || url()->current() == route('notice.index')) ? '' : 'collapse'}} " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('admin.addnotice') }}">
+                        <a class="{{url()->current() == route('notice.create') ? 'active' : ''}}" href="{{ route('notice.create') }}">
                             <i class="bi bi-circle"></i><span>Add Notice</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.updatenotice') }}">
+                        <a class=" {{url()->current() == route('notice.index') ? 'active' : ''}}" href="{{ route('notice.index') }}">
                             <i class="bi bi-circle"></i><span>Update Notice</span>
                         </a>
                     </li>
@@ -29,17 +29,17 @@
             </li><!-- End Notice Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link {{(url()->current() == route('event.create') || url()->current() == route('event.index')) ? '' : 'collapsed'}}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-calendar-date"></i><span>Events</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="forms-nav" class="nav-content {{(url()->current() == route('event.create') || url()->current() == route('event.index')) ? '' : 'collapse'}}  " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('admin.addevent') }}">
+                        <a class=" {{url()->current() == route('event.create') ? 'active' : ''}}"  href="{{ route('event.create') }}">
                             <i class="bi bi-circle"></i><span>Add Events</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.allEvents') }}">
+                        <a class=" {{url()->current() == route('event.index') ? 'active' : ''}}" href="{{ route('event.index') }}">
                             <i class="bi bi-circle"></i><span>Update Events</span>
                         </a>
                     </li>
@@ -48,37 +48,22 @@
             </li><!-- End Events Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Academic</span><i
+                <a class="nav-link nav-link {{(url()->current() == route('questionPaper.index') || url()->current() == route('questionPaper.create')) ? '' : 'collapsed'}}" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Question Bank</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
 
 
-                {{-- <li>
-                        <a href="tables-general.html">
-                            <i class="bi bi-circle"></i><span>Update Courses</span>
-                            </a>
-                            </li>
-                            <li>
-                                <a href="tables-data.html">
-                                    <i class="bi bi-circle"></i><span>Add Syllebus</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Update Syllebus</span>
-                                            </a>
-                                            </li> --}}
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="tables-nav" class="nav-content {{(url()->current() == route('questionPaper.index') || url()->current() == route('questionPaper.create')) ? '' : 'collapse'}}  " data-bs-parent="#sidebar-nav">
 
 
                     <li>
-                        <a href="{{ route('admin.questionBank.show') }}">
+                        <a  class="{{url()->current() == route('questionPaper.create') ? 'active' : ''}}"  href="{{ route('questionPaper.create') }}">
                             <i class="bi bi-circle"></i><span>Add Question Papers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.allQuestion') }}">
+                        <a  class="{{url()->current() == route('questionPaper.index') ? 'active' : ''}}"  href="{{ route('questionPaper.index') }}">
                             <i class="bi bi-circle"></i><span>Update Question Papers</span>
                         </a>
                     </li>
@@ -87,84 +72,68 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav-carousel" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-card-image"></i><span>Carousel Images</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link nav-link {{(url()->current() == route('admin.carousel-img') || url()->current() == route('admin.carousel-img.add')) ? '' : 'collapsed'}}" data-bs-target="#components-nav-carousel" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-card-image"></i><span>Homepage Images</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav-carousel" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="components-nav-carousel" class="nav-content {{(url()->current() == route('admin.carousel-img') || url()->current() == route('admin.carousel-img.add')) ? '' : 'collapse'}}  " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('admin.carousel-img.add') }}">
-                            <i class="bi bi-circle"></i><span>Add Carousel Image</span>
+                        <a  class="{{url()->current() == route('admin.carousel-img.add') ? 'active' : ''}}"  href="{{ route('admin.carousel-img.add') }}">
+                            <i class="bi bi-circle"></i><span>Add Homepage Image</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.carousel-img') }}">
-                            <i class="bi bi-circle"></i><span>Update Carousel Images</span>
+                        <a  class="{{url()->current() == route('admin.carousel-img') ? 'active' : ''}}"  href="{{ route('admin.carousel-img') }}">
+                            <i class="bi bi-circle"></i><span>Update Homepage Images</span>
                         </a>
                     </li>
 
                 </ul>
             </li><!-- End Notice Nav -->
 
-
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('images.form') }}">
-                    <i class="bi bi-card-image"></i>
-                    <span>Carousel Images</span>
+            <li class="nav-item">
+                <a class="nav-link {{url()->current() == route('admin.specialNews') ? '' : 'collapsed'}}" href="{{ route('admin.specialNews') }}">
+                    <i class=" bi bi-newspaper"></i>
+                    <span>Special News</span>
                 </a>
-            </li> --}}
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{url()->current() == route('DeptInfo') ? '' : 'collapsed'}}" href="{{ route('DeptInfo') }}">
+                    <i class="ri-coin-line"></i>
+                    <span>Dept Attributes</span>
+                </a>
+            </li>
+
         @endif
         <br>
-        <!-- End Charts Nav -->
 
-        <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
-      </li>-->
         <!-- End Icons Nav -->
-        @if ($profileData->controller_role != 'Staff' || $profileData->controller_role == 'Tearcher')
+
             <li class="nav-heading">Profile Settings</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.profile') }}">
+                <a class="nav-link {{url()->current() == route('admin.profile') ? '' : 'collapsed'}}" href="{{ route('admin.profile') }}">
                     <i class="ri-account-circle-line"></i>
                     <span>Profile</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('side.publication') }}">
-                    <i class="ri-file-list-3-line"></i>
-                    <span>Publications</span>
+                <a class="nav-link {{(url()->current() == route('ShowAllAward') || url()->current()==route('addAward') ) ? '' : 'collapsed'}}" href="{{ route('ShowAllAward') }}">
+                    <i class="bi bi-award"></i>
+                    <span>Awards</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('ShowAllEducation') }}">
+                <a class="nav-link {{url()->current() == route('ShowAllEducation') || url()->current()==route('addEducation') ? '' : 'collapsed'}}" href="{{ route('ShowAllEducation') }}">
                     <i class="bi bi-journal-bookmark-fill"></i>
                     <span>Education</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('ShowAllExperience') }}">
+                <a class="nav-link {{url()->current() == route('ShowAllExperience') || url()->current()==route('addExperience')|| url()->current()==route('addOtherExperience') ? '' : 'collapsed'}}" href="{{ route('ShowAllExperience') }}">
                     <i class="bi bi-briefcase"></i>
                     <span>Experience</span>
                 </a>
@@ -173,10 +142,10 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Others</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link {{(url()->current() == route('publications.index') || url()->current()==route('publications.create') || url()->current() == route('AllResearchProfile') || url()->current()== route('admin.researchInt')) ? '' : 'collapsed'}} " data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="ri-search-eye-line"></i><span>Research</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="charts-nav" class="nav-content {{(url()->current() == route('publications.index') || url()->current()==route('publications.create') ||  url()->current() == route('AllResearchProfile') || url()->current()== route('admin.researchInt')) ? '' : 'collapse'}} " data-bs-parent="#sidebar-nav">
 
                     {{-- <li>
                         <a href="{{ route('ShowAllExperience') }}">
@@ -184,109 +153,50 @@
                         </a>
                     </li> --}}
                     <li>
-                        <a href="{{ route('ShowAllAward') }}">
-                            <i class="bi bi-circle"></i><span>Awards</span>
+                        <a class=" {{url()->current() == route('publications.index') || url()->current()==route('publications.create') ? 'active' : ''}}"  href="{{ route('publications.index') }}">
+                            <i class="bi bi-circle"></i><span>Publication/Project</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('AllResearchProfile') }}">
+                        <a  class="{{url()->current() == route('AllResearchProfile') ? 'active' : ''}}"  href="{{ route('AllResearchProfile') }}">
                             <i class="bi bi-circle"></i><span>Research Profile</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('admin.researchInt') }}">
+                        <a  class="{{url()->current() == route('admin.researchInt') ? 'active' : ''}}"  href="{{ route('admin.researchInt') }}">
                             <i class="bi bi-circle"></i><span>Research Interest</span>
                         </a>
                     </li>
                 </ul>
             </li>
-        @endif
+
 
         @if ($profileData->controller_role == 'Admin')
             <br>
             <li class="nav-heading">Administration</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.ControlAllUser') }}">
+                <a class="nav-link {{url()->current() == route('admin.ControlAllUser') ? '' : 'collapsed'}}" href="{{ route('admin.ControlAllUser') }}">
                     <i class="ri-admin-line"></i>
-                    <span>Administration</span>
+                    <span>User Menagement</span>
                 </a>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.specialNews') }}">
-                    <i class=" bi bi-newspaper"></i>
-                    <span>Special Event</span>
+                <a class="nav-link {{url()->current() == route('chairmanMessage') ? '' : 'collapsed'}}" href="{{ route('chairmanMessage') }}">
+                    <i class="ri-message-3-line"></i>
+                    <span>Chairman Info</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('DeptInfo') }}">
-                    <i class="ri-coin-line"></i>
-                    <span>Dept Attributes</span>
-                </a>
-            </li>
+
+
+
         @endif
 
 
-        {{--      <li class="nav-item">
-        <a href="{{ route('user.logs') }}" class="btn btn-primary" target="_blank">View User Logs</a>
-
-            <i class="bi bi-card-image"></i>
-          <span>Carousel Images</span>
-        </a>
-      </li> --}}
-
-        <!-- End Profile Page Nav -->
-        <!--
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li> -->
-        <!-- End F.A.Q Page Nav -->
-
-        <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li> -->
-        <!-- End Contact Page Nav -->
-        <!--
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li> -->
-        <!-- End Register Page Nav -->
-        <!--
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li> -->
-        <!-- End Login Page Nav -->
-
-        <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li> -->
-        <!-- End Error 404 Page Nav -->
-
-        <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li> -->
-        <!-- End Blank Page Nav -->
 
     </ul>
 

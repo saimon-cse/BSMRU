@@ -1,9 +1,22 @@
+@section('title', 'Add Publication')
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Publication</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Research</li>
+                    <li class="breadcrumb-item">publication</li>
+                    <li class="breadcrumb-item active">Add</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add Journal Article</h5>
+                {{-- <h5 class="card-title">Add Publication/Projects</h5> --}}
+                <br>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>
@@ -25,7 +38,7 @@
                 @endif
 
                 <!-- Horizontal Form -->
-                <form id="journalForm" method="POST" action="{{ route('admin.publication.store') }}" enctype="multipart/form-data">
+                <form id="journalForm" method="POST" action="{{ route('publications.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-3">

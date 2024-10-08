@@ -1,6 +1,19 @@
+
+@section('title', 'Edit Event')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Events</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item ">Events</li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Edit Event</h5>
@@ -24,16 +37,17 @@
                     </div>
                 @endif
 
-                <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{-- <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         Failed to upload Notice
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div> -->
+                      </div> --> --}}
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('admin.event.edited', ['id' => $event->id]) }} onsubmit="sanitizeInputs()""
+                <form method="POST" action="{{ route('event.update', ['event' => $event->id]) }} onsubmit="sanitizeInputs()
                     enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
                         <div class="col-sm-2">

@@ -1,9 +1,22 @@
+
+@section('title', 'Manage Carousel Images')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Homepage Images</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Homepage Images</li>
+                    {{-- <li class="breadcrumb-item active">Profile</li> --}}
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Carousel Images</h5>
+                <h5 class="card-title">Homepage Images</h5>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>

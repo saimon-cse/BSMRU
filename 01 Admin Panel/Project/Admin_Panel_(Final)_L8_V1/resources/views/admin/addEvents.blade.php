@@ -1,6 +1,18 @@
+@section('title', 'Add Events')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Events</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Events</li>
+                    <li class="breadcrumb-item active">Add</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Events</h5>
@@ -31,7 +43,7 @@
 
 
                 <!-- Horizontal Form -->
-                <form method="POST" action="{{ route('admin.event.store') }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('event.store') }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Event Date <span style="color:brown">*</span></label>

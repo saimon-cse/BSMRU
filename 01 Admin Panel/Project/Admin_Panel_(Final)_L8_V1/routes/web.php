@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\QuestionBankController;
 use App\Http\Controllers\StuffController;
+use App\Models\QuestionBank;
 use Illuminate\Support\Facades\Route;
 // namespace App\Http\Controllers;
 
@@ -26,6 +31,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Cache\RateLimiting\Limit;
 
 
 
@@ -50,9 +57,25 @@ Route::get('/approval-pending', function () {
     return view('approval-pending');
 })->name('approval-pending');
 
-Route::get('/dashboard/{id}', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/register',function(){
+    return redirect('/login');
+});
+
+Route::get('/developer',function(){
+    return view('developer');
+});
+
+RateLimiter::for('login', function (Request $request) {
+    return [
+        Limit::perMinute(500),
+        Limit::perMinute(3)->by($request->input('email')),
+    ];
+});
+
+
+// Route::get('/dashboard/{id}', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -76,44 +99,28 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
     Route::post('academic', [AdminController::class, 'Academic'])->name('admin.profile.academin');
 
     //Notice
-    Route::get('addnotice', [AdminController::class, 'AdminAddNotice'])->name('admin.addnotice');
-    Route::post('notice/store', [AdminController::class, 'AdminNoticeStore'])->name('admin.notice.store');
-    Route::get('notices', [AdminController::class, 'AdminNoticeUpdate'])->name('admin.updatenotice');
-    Route::get('notice/{id}/edit', [AdminController::class, 'AdminEditNotice'])->name('admin.editnotice');
-    Route::post('notices/edited/{id}', [AdminController::class, 'AdminNoticeEdited'])->name('admin.notice.edited');
-    Route::get('notice/detete/{id}', [AdminController::class, 'NoticeDelete'])->name('admin.noticedelete');
-    //notice Ranking
-    Route::get('admin/notices/{id}/up', [AdminController::class, 'noticeRankUp'])->name('admin.noticeRankup');
-    Route::get('admin/notices/{id}/down', [AdminController::class, 'noticeRankDown'])->name('admin.noticeRankDown');
 
-    // Route::get('accountant', [AdminController::class, 'accountant']);
-    // Route::post('admin/publications/{id}', [AdminController::class, 'PublicationUpdate'])->name('admin.publication.update');
+    Route::resource('notice', NoticeController::class);
+
+    Route::get('notice/{id}/rankup', [NoticeController::class, 'rankUp'])->name('notice.rankUp');
+    Route::get('notice/{id}/rankdown', [NoticeController::class, 'rankDown'])->name('notice.rankDown');
 
 
     //Events
-    Route::get('addEvents', [AdminController::class, 'AddEvent'])->name('admin.addevent');
-    Route::post('admin/event/store', [AdminController::class, 'AdminEventStore'])->name('admin.event.store');
-    Route::get("events", [AdminController::class, 'allEvents'])->name('admin.allEvents');
-    Route::get("events/{id}/edit", [AdminController::class, 'editEvents'])->name('editEvent');
-    Route::post("event/edited/{id}", [AdminController::class, 'editedEvent'])->name('admin.event.edited');
-    Route::get('event/delete/{id}', [AdminController::class, 'deleteEvent'])->name('deleteEvent');
+    Route::resource('event',EventController::class);
+    //  events Ranking
+    Route::get('event/{id}/rankUp', [EventController::class, 'EventsRankUp'])->name('event.rankUp');
+    Route::get('event/{id}/rankDown', [EventController::class, 'EventsRankDown'])->name('event.rankDown');
 
 
 
     //publications
-    Route::get('publication/new', [AdminController::class, 'newPublication'])->name('admin.newPublication');
-    Route::post('admin/publications/store', [AdminController::class, 'publicationStore'])->name('admin.publication.store');
-    // delete publication
-   Route::get('admin/publication/delete/{id}', [AdminController::class, 'PublicationDelete'])->name('admin.publication.delete');
-    // edit view publication
-    Route::get('publications/{id}',[AdminController::class, 'AdminPublicationEdit'])->name('admin.publication.edit');
-    // store the edited publication
-    Route::post('admin/publication/update/{id}', [AdminController::class, 'PublicationEidited'])->name('publicationUpdate');
 
-    // add Conference Proceedings
-    // Route::get('conference/new', [AdminController::class, 'AddConferencePaper'])->name('newConferencePaper');
-    // //store conference paper
-    // Route::post('admin/conference/news', [AdminController::class, 'ConferencePaperStore'])->name('newConferencePaper.store')
+    Route::resource('publications', PublicationController::class);
+    //Publication Ranking
+    Route::get('publications/{id}/rankUp', [PublicationController::class, 'rankUp'])->name('publications.rankUp');
+    Route::get('publications/{id}/rankDown', [PublicationController::class, 'rankDown'])->name('publications.rankDown');
+
 
 
 
@@ -125,17 +132,12 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
 
 
 
-    //side bar publication
-    Route::get('publications',[AdminController::class, 'AllPublication'])->name('side.publication');
-
-
-
 
     //Education
     Route::get('education/add', [AdminController::class, 'AddEducation'])->name('addEducation');
     Route::post('admin/education/store', [AdminController::class, 'StoreEducation'])->name('StoreEducation');
     Route::get('educations', [AdminController::class, 'ShowAllEducation'])->name('ShowAllEducation');
-    Route::get('educations/{id}', [AdminController::class, 'EditEducation'])->name('EditEducation');
+    Route::get('educations/{id}/edit', [AdminController::class, 'EditEducation'])->name('EditEducation');
     Route::get('admin/education/edited/{id}',[AdminController::class, 'EditedEducation'])->name('EditedEducation');
     Route::get('admin/education/delete/{id}', [AdminController::class, 'DeleteEducation'])->name('DeleteEducation');
 
@@ -143,12 +145,12 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
     Route::get('experience/add', [AdminController::class, 'AddExperience'])->name('addExperience');
     Route::post('admin/experiencess/store', [AdminController::class, 'StoreExperience'])->name('StoreExperience');
     Route::get('experience', [AdminController::class, 'ShowAllExperience'])->name('ShowAllExperience');
-    Route::get('experiences/{id}', [AdminController::class, 'EditExperience'])->name('EditExperience');
+    Route::get('experiences/{id}/edit', [AdminController::class, 'EditExperience'])->name('EditExperience');
     Route::get('admin/experience/edited/{id}',[AdminController::class, 'EditedExperience'])->name('EditedExperience');
-    Route::get('admin/experience/delete/{id}', [AdminController::class, 'DeleteExperience'])->name('DeleteExperience');
+    Route::get('admin/experience/{id}/delete', [AdminController::class, 'DeleteExperience'])->name('DeleteExperience');
     Route::get('experience/other', [AdminController::class, 'OtherExperience'])->name('addOtherExperience');
     Route::post('admin/experience/others', [AdminController::class, 'StoreOtherExperience'])->name('storeProffExperience');
-    Route::get('other-experience/{id}', [AdminController::class, 'SingleOtherExperience'])->name('singleOtherExperience');
+    Route::get('other-experience/{id}/edit', [AdminController::class, 'SingleOtherExperience'])->name('singleOtherExperience');
     Route::post('admin/experience/others/{id}', [AdminController::class, 'OtherExperienceEdited'])->name('OtherExperienceEdited');
     Route::get('admin/experience/otherss/delete/{id}', [AdminController::class, 'OtherExperiencedelete'])->name('OtherExperiencedelete');
 
@@ -178,14 +180,9 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
      Route::get('admin/education_down/{id}', [AdminController::class, 'EducationRankDown'])->name('admin.EducationRankDown');
 
 
-      //Publication Ranking
-    Route::get('admin/publication_up/{id}', [AdminController::class, 'PublicationRankUp'])->name('admin.PublicationRankup');
-    Route::get('admin/publication_down/{id}', [AdminController::class, 'PublicationRankDown'])->name('admin.PublicationRankDown');
 
 
-    //  events Ranking
-     Route::get('admin/events_uo/{id}', [AdminController::class, 'EventsRankUp'])->name('admin.EventsRankUp');
-     Route::get('admin/events_down/{id}', [AdminController::class, 'EventsRankDown'])->name('admin.EventsRankDown');
+
 
 
     //   General Experience Ranking
@@ -217,18 +214,21 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
     // Route::get('admin/Administration/user/{id}',[AdminController::class, 'AdministratorUserEdit'])->name('admin.ControlUserEdit');
     // Route::post('admin/Administration/users/{id}',[AdminController::class, 'AdministratorUserEdited'])->name('admin.ControlUserEdited');
     // Route::get('admin/Administration/users/delete/{id}',[AdminController::class, 'AdministratorUserDelete'])->name('admin.ControlUserDelete');
-    Route::get('admin/Administration/users/up/{id}',[AdminController::class, 'AdministratorUserRankUP'])->name('admin.ControlUserRankUp');
-    Route::get('admin/Administration/users/down/{id}',[AdminController::class, 'AdministratorUserRankDown'])->name('admin.ControlUserRankDown');
+    Route::get('admin/Administration/teacher/up/{id}',[AdminController::class, 'TeacherRankUP'])->name('admin.teacherRankUp');
+    Route::get('admin/Administration/teacher/down/{id}',[AdminController::class, 'TeacherRankDown'])->name('admin.teacherRankDown');
+    Route::get('admin/Administration/staff/up/{id}',[AdminController::class, 'StaffRankUP'])->name('admin.StaffRankUp');
+    Route::get('admin/Administration/staff/down/{id}',[AdminController::class, 'StaffRankDown'])->name('admin.StaffRankDown');
+
+    Route::get('/admin/active_status', [AdminController::class, 'ChangeActiveStatus'])->name('admin.activeStatus');
+    Route::get('/admin/change_visible', [AdminController::class, 'ChangeVisibleStatus'])->name('admin.changeVisible');
+
+    Route::post('/registeruser',[AdminController::class, 'Register'])->name('RegisterUser');
 
 
 
+    // question bank / Question paper
+    Route::resource('questionPaper', QuestionBankController::class);
 
-    Route::get('question-add', [AdminController::class, 'AddQuestionBank'])->name('admin.questionBank.show');
-    Route::post('admin/question-adds', [AdminController::class, 'StoreQuestionBank'])->name('admin.questionBank.store');
-    Route::get('qustion-papers', [AdminController::class, 'AllQuestion'])->name('admin.allQuestion');
-    Route::get('question-paper/{id}',[AdminController::class, 'QuestionEdit'])->name('admin.question.edit');
-    Route::post('admin/question-paperss/{id}', [AdminController::class, 'QuestionEdited'])->name('admin.question.edited');
-    Route::get('admin/question-delete/{id}',[AdminController::class, 'QuestionDelete'])->name('admin.question.delete');
 
 
     Route::get('carousel-image-all',[AdminController::class, 'CarouselAll'])->name('admin.carousel-img');
@@ -245,6 +245,10 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
     Route::post('admin/dept_infos/{id}',[AdminController::class, 'DeptInfoStore'])->name('DeptInfoStore');
 
 
+    Route::get('chairman-message', [AdminController::class, 'ChairmanMessage'])->name('chairmanMessage');
+    Route::post('admin/chairman-info/{id}/edit',[AdminController::class, 'ChairmanInfoStore'])->name('chairmanInfo');
+
+
     Route::get('Password_reset',[AdminController::class, 'StuffPasswordUpdate'])->name('stuff.passwordUpdate');
 
     //Experiences
@@ -257,25 +261,27 @@ Route::middleware(['auth', 'isApprove:true'])->group(function(){
 });
 //end group admin middleware
 
-Route::middleware(['auth', 'isApprove:stuff'])->group(function(){
+// Route::middleware(['auth', 'isApprove:stuff'])->group(function(){
 
-    Route::get('/stuff/dashboard', [StuffController::class, 'StuffDashboard'])->name('stuff.dashboard');
-}); //end group stuff middleware
-
-
+//     Route::get('/stuff/dashboard', [StuffController::class, 'StuffDashboard'])->name('stuff.dashboard');
+// }); //end group stuff middleware
 
 
-Route::get('/hello-world/makeHash/', function(){
-    return view('stuff.dashboard');
-});
-
-Route::post('/generate-hash', [StuffController::class, 'generateHash'])->name('generateHash');
-// reset password
 
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/hello-world/makeHash/', function(){
+//     return view('stuff.dashboard');
 // });
+
+// Route::post('/generate-hash', [StuffController::class, 'generateHash'])->name('generateHash');
+// // reset password
+
+
+// // Route::get('/', function () {
+// //     return view('welcome');
+// // });
+Auth::routes(['register' => false]);
+
 
 Auth::routes();
 

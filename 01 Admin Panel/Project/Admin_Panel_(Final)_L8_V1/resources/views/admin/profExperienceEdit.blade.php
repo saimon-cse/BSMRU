@@ -1,3 +1,6 @@
+
+@section('title', 'Edit Professional Experience')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">

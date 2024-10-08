@@ -1,9 +1,12 @@
+
+@section('title', 'Edit Carousel Images')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Carousel Images Add</h5>
+                <h5 class="card-title">Homepage Images Add</h5>
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-1"></i>
@@ -42,7 +45,7 @@
                     </div> --}}
 
                     <div class="row mb-3">
-                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Edit Carousel Image</label>
+                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Edit Homepage Image</label>
                         <div class="col-md-8 col-lg-9">
                             <img id="imagePreview"
                                 src="{{ $dept->dept_url.'/assets/img/' . $carousel->image }}" alt="Profile" style="width: 150px; height: 150px;">

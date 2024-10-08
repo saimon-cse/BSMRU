@@ -1,9 +1,22 @@
+
+@section('title', 'Special News')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+        <h1>Special News</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Special News</li>
+                {{-- <li class="breadcrumb-item active">Profile</li> --}}
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Special Event</h5>
+                <h5 class="card-title">                     </h5>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>

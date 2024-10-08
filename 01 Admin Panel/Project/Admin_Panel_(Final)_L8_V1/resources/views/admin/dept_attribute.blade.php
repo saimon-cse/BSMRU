@@ -1,9 +1,22 @@
+
+@section('title', 'Department Attributes')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Department Attributes</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    {{-- <li class="breadcrumb-item">Users</li> --}}
+                    <li class="breadcrumb-item active">Department Attributes</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Department Attributes</h5>
+                <h5 class="card-title"> </h5>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle me-1"></i>
@@ -34,13 +47,13 @@
                 <form method="POST" action="{{ route('DeptInfoStore', ['id' => $dept->id]) }}" onsubmit="sanitizeInputs()" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Dept Code</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputText" name="dept_code"
                                 value="{{ $dept->dept_code }}" require>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Dept Short Name</label>

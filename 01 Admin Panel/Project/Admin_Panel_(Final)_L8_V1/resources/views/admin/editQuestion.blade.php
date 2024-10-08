@@ -1,7 +1,22 @@
+
+@section('title', 'Edit Question')
+
 @extends('admin.dashboard')
 
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Questions papers</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Academic</li>
+                    <li class="breadcrumb-item">Question</li>
+
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Edit Question</h5>
@@ -25,9 +40,9 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.question.edited', ['id'=>$question->id]) }}" enctype="multipart/form-data" onsubmit="sanitizeInputs()">
+                <form method="POST" action="{{ route('questionPaper.update', ['questionPaper'=>$question->id]) }}" enctype="multipart/form-data" onsubmit="sanitizeInputs()">
                     @csrf
-
+                    @method('PUT')
                     <div class="row mb-3">
                         <label for="degree" class="col-sm-2 col-form-label">Degree</label>
                         <div class="col-sm-2">
@@ -94,10 +109,10 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="file" class="col-sm-2 col-form-label">Current File</label>
+                        <label for="file" class="col-sm-2 col-form-label">Change File</label>
                         <div class="col-sm-10">
                             @if ($question->file)
-                                <p>{{ $question->file }}</p>
+                                {{-- <p>{{ $question->file }}</p> --}}
                                 <input accept=".pdf, .doc, .docx" class="form-control" type="file" id="file" name="file">
                             @else
                                 <input accept=".pdf, .doc, .docx" class="form-control" type="file" id="file" name="file" required>

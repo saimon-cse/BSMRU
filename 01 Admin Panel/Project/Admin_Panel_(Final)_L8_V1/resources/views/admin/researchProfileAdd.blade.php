@@ -1,9 +1,22 @@
+
+@section('title', 'Add Research profile')
+
 @extends('admin.dashboard')
 @section('admin')
-    <main id="main" class="main">
+    <main id="main" class="main"><div class="pagetitle">
+        <h1>Research Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item ">Profile</li>
+                <li class="breadcrumb-item active">Add</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add Research Profile</h5>
+                <h5 class="card-title">                 </h5>
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-1"></i>

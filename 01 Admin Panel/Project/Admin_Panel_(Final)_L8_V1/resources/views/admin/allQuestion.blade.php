@@ -1,6 +1,19 @@
+
+@section('title', 'Manage Questions')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Question Papers</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Academic</li>
+                    <li class="breadcrumb-item active">Questions</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">All Question Papers</h5>
@@ -25,7 +38,7 @@
                 @endif
 
 
-                <form method="GET" action="{{ route('admin.allQuestion') }}" class="mb-3">
+                <form method="GET" action="{{ route('questionPaper.index') }}" class="mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Search by Year, Semester, Type or Title. (AND/OR) keyword also support" value="{{ request('search') }}">
                         <button class="btn btn-primary" type="submit">Search</button>
@@ -75,12 +88,16 @@
                                 <td>
                                     {{-- <a class="btn btn-info" href="{{ route('admin.editnotice', ['id' => $notice->id]) }}"><i
                                             class="bx bxs-edit"></i></a> --}}
-                                    <a class="btn btn-info"
-                                        href="{{route('admin.question.edit',['id'=>$question->id])}}"><i
+                                    <a class="btn btn-info btn-sm"
+                                        href="{{route('questionPaper.edit',['questionPaper'=>$question->id])}}"><i
                                             class="bx bxs-edit"></i></a>
-                                    <a class="delete-link btn btn-danger"
-                                        href="{{route('admin.question.delete',['id'=>$question->id])}}  "><i
-                                            class="bx bxs-trash"></i></a>
+                                    <form action="{{ route('questionPaper.destroy', $question->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this question-paper?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bx bxs-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
 
                             </tr>

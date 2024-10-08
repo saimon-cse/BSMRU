@@ -1,0 +1,38 @@
+body{
+
+    font-family: 'Arial', sans-serif !important;
+}
+
+.card-body{
+    padding: 20px;
+    padding-top: 10px;
+}
+
+.notice-container {
+    margin-top: 50px;
+}
+.notice-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+.notice-date, .notice-type {
+    font-size: 1em;
+    color: #6c757d;
+}
+.notice-description {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+.download-link {
+    margin-top: 30px;
+    font-size: 1.2em;
+}
+
+
+.notice-date span{
+    margin-left: 10px;
+}
+
+.notice-type span{
+    margin-left: 10px;
+}

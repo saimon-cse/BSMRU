@@ -1,3 +1,6 @@
+
+@section('title', 'User Profile')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
@@ -54,7 +57,7 @@
 
                                 {{-- <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab"
-                                        data-bs-target="#profile-settings">Research Profile</button>
+                                        data-bs-target="#profile-settings">Profile Settings</button>
                                 </li> --}}
 
                                 <li class="nav-item">
@@ -303,10 +306,108 @@
 
                                 </div>
 
+                                <style>
+                                    /* The switch - the box around the slider */
+                                    .switch {
+                                        position: relative;
+                                        display: inline-block;
+                                        width: 60px;
+                                        height: 34px;
+                                    }
+
+                                    /* Hide default HTML checkbox */
+                                    .switch input {
+                                        opacity: 0;
+                                        width: 0;
+                                        height: 0;
+                                    }
+
+                                    /* The slider */
+                                    .slider {
+                                        position: absolute;
+                                        cursor: pointer;
+                                        top: 0;
+                                        left: 0;
+                                        right: 0;
+                                        bottom: 0;
+                                        background-color: #ccc;
+                                        -webkit-transition: .4s;
+                                        transition: .4s;
+                                    }
+
+                                    .slider:before {
+                                        position: absolute;
+                                        content: "";
+                                        height: 26px;
+                                        width: 26px;
+                                        left: 4px;
+                                        bottom: 4px;
+                                        background-color: white;
+                                        -webkit-transition: .4s;
+                                        transition: .4s;
+                                    }
+
+                                    input:checked+.slider {
+                                        background-color: #f5ca0a;
+                                    }
+
+                                    input:focus+.slider {
+                                        box-shadow: 0 0 1px #ffffff;
+                                    }
+
+                                    input:checked+.slider:before {
+                                        -webkit-transform: translateX(26px);
+                                        -ms-transform: translateX(26px);
+                                        transform: translateX(26px);
+                                    }
+
+                                    /* Rounded sliders */
+                                    .slider.round {
+                                        border-radius: 34px;
+                                    }
+
+                                    .slider.round:before {
+                                        border-radius: 50%;
+                                    }
+                                </style>
                                 <div class="tab-pane fade pt-3" id="profile-settings">
 
                                     <!--======== Academic & Research====== -->
 
+                                     {{-- <div class="row mb-3">
+                                            <label for="Phone" style="" class="col-md-4 col-lg-3 col-form-label">Profile Edit Mode</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <label class="switch">
+                                                    <input type="checkbox" {{$profileData->visible ? '':'checked'}} class="visible-toggle" data-id="{{$profileData->id}}">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.visible-toggle').change(function() {
+            var visible = $(this).prop('checked') ? 0 : 1;  // Send 1 if checked, 0 if unchecked
+            var userId = $(this).data('id');
+
+            $.ajax({
+                url: '{{ route("admin.changeVisible") }}',  // This will be a new route for handling visible status
+                method: 'GET',
+                data: {
+                    visible: visible,
+                    id: userId
+                },
+                success: function(response) {
+                    console.log('Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        });
+    });
+</script> --}}
                                     {{-- <h5 class="card-title">Research Interest</h5>
                                     <p class="small fst-italic" style="margin-top: -10px">@php echo $str; @endphp</p> --}}
 

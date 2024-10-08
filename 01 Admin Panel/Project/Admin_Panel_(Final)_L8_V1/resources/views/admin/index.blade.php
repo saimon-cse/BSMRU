@@ -1,3 +1,5 @@
+
+@section('title', 'Dashboard')
 @extends('admin.dashboard')
 @section('admin')
 

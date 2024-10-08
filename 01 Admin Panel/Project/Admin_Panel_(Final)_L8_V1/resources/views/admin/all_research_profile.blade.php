@@ -1,6 +1,22 @@
+
+@section('title', 'Research Profiles')
+
 @extends('admin.dashboard')
 @section('admin')
     <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Research Profile</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Research</li>
+                    <li class="breadcrumb-item active">profile</li>
+                </ol>
+            </nav>
+            <a href="{{ route('AddResearchProfile') }}" class="btn btn-success"
+            style="width: 190px;  margin-bottom:20px">Add Research profile
+        </a>
+        </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Research Profile</h5>
@@ -23,10 +39,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-
-                <a href="{{ route('AddResearchProfile') }}" class="btn btn-success"
-                    style="width: 190px;  margin-bottom:20px">Add Research profile
-                </a>
 
                 <!-- Table with hoverable rows -->
                 <table class="table table-hover">
@@ -52,16 +64,16 @@
                                     @endphp
                                 </td>
                                 <td>
-                                    <a class="btn btn-info"
+                                    <a class="btn btn-sm btn-info"
                                         href="{{ route('EditResearcProfile', ['id' => $research->id]) }}"><i
                                             class="bx bxs-edit"></i></a>
-                                    <a class="btn btn-success"
+                                    <a class="btn btn-sm btn-success"
                                         href="{{ route('admin.ResearchProfileRankup', ['id' => $research->id]) }}"><i
                                             class="bx bxs-upvote"></i></a>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-sm btn-primary"
                                         href="{{ route('admin.ResearchProfileRankDown', ['id' => $research->id]) }}"><i
                                             class="bx bxs-downvote"></i></a>
-                                    <a class="delete-link btn btn-danger"
+                                    <a class="delete-link btn btn-sm btn-danger"
                                         href="{{ route('DeleteResearchProfile', ['id' => $research->id]) }}"><i
                                             class="bx bxs-trash"></i> </a>
                                 </td>

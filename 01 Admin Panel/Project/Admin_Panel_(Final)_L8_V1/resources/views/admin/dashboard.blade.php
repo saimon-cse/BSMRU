@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>BSMRU </title>
+    <title> @yield('title')</title>
+
     <meta content="" name="description">
     <meta content="" name="keywords">
     @include('admin.partials.header')
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </head>
 
@@ -40,129 +43,9 @@
     @include('admin.partials.footerFile')
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all forms on the page
-            var forms = document.querySelectorAll('form');
-
-            forms.forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    var valid = true;
-                    var requiredFields = form.querySelectorAll('[required]');
-                    var fileInputs = form.querySelectorAll('input[type="file"]');
-
-                    // Check required fields
-                    requiredFields.forEach(function(field) {
-                        if (!field.value) {
-                            valid = false;
-                            alert('Please fill out all required fields.');
-                        }
-                    });
-
-                    // Check file inputs for valid extensions
-                    fileInputs.forEach(function(fileInput) {
-                        var accept = fileInput.getAttribute('accept');
-                        if (accept && fileInput.value) {
-                            var allowedExtensions = accept.split(',').map(function(ext) {
-                                return ext.trim().toLowerCase().replace('.', '');
-                            });
-                            var filePath = fileInput.value;
-                            var fileExtension = filePath.split('.').pop().toLowerCase();
-
-                            if (!allowedExtensions.includes(fileExtension)) {
-                                valid = false;
-                                alert('Only the following file types are allowed: ' +
-                                    allowedExtensions.join(', '));
-                            } else if (fileExtension === 'jpeg') {
-                                // Handle renaming for .jpeg files to .jpg
-                                var file = fileInput.files[0];
-                                var newFileName = file.name.replace(/\.jpeg$/i, '.jpg');
-                                var renamedFile = new File([file], newFileName, {
-                                    type: file.type
-                                });
-                                var dataTransfer = new DataTransfer();
-                                dataTransfer.items.add(renamedFile);
-                                fileInput.files = dataTransfer.files;
-                            } else {
-                                // Rename the file extension to lowercase for other files
-                                var file = fileInput.files[0];
-                                var renamedFile = new File([file], file.name.replace(
-                                    /\.[^/.]+$/,
-                                    function(ext) {
-                                        return ext.toLowerCase();
-                                    }), {
-                                    type: file.type
-                                });
-                                var dataTransfer = new DataTransfer();
-                                dataTransfer.items.add(renamedFile);
-                                fileInput.files = dataTransfer.files;
-                            }
-                        }
-                    });
-
-                    if (!valid) {
-                        event.preventDefault();
-                    }
-                });
-            });
-        });
-    </script>
-
-
-    <script>
-        // first editor
-        ClassicEditor
-            .create(document.querySelector('.editor'), {
-                ckfinder: {
-                    uploadUrl: "ckfileupload.php",
-                }
-            })
-            .then(editor => {
-
-                console.log(editor);
-
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-    <!-- ckeditor5 JS -->
+    <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
 
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all delete links
-            var deleteLinks = document.querySelectorAll('.delete-link');
-
-            deleteLinks.forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent the default action
-                    var confirmation = confirm('Are you sure you want to delete this item?');
-
-                    if (confirmation) {
-                        // If the user confirms, proceed with the deletion
-                        window.location.href = link.href;
-                    }
-                });
-            });
-        });
-    </script>
-
-
-{{-- ==============      Remove the Tages ==================== --}}
-
-{{-- to use this here is an example: <form method="POST" action="" enctype="multipart/form-data" onsubmit="sanitizeInputs()"> --}}
-{{-- need to  use "sanitizeInputs()" in the form tag --}}
-<script>
-    function sanitizeInputs() {
-        const inputs = document.querySelectorAll('input[type="text"]');
-
-        inputs.forEach(input => {
-            input.value = input.value.replace(/<[^>]*>?/gm, '');
-        });
-    }
-</script>
 
 
 </body>

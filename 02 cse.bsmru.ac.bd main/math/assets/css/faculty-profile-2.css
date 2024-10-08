@@ -1,0 +1,412 @@
+/*Faculty Personal Profile*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+#faculty-image-bio img{
+	margin-top: 10px;
+	width: 100%; height: 270px; object-fit: fill;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#faculty-image-bio p{
+	margin-top: -6px;
+}
+#faculty-image-bio span{
+	margin-left: 5px;
+}
+
+#faculty-details .nav a{
+	font-family: 'Arial', sans-serif !important;
+	color: #364697;
+	font-size: 1em;
+}
+
+
+/*Academic Experience details*/
+#nav-tabContent .faculty-attributes div{
+	margin-top: 20px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px 0px;
+	border-radius: 10px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	padding-right: 2px;
+	
+}
+
+#education-div{
+	transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#education-div:hover{
+	background-color: #fbfbfb; /* Change background color on hover */
+	transform: scale(1.02) translateY(-4px); /* Slightly scale up and move upwards */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add deeper shadow on hover */
+}
+
+#nav-tabContent .faculty-attributes p{
+	margin-top: -6px;
+}
+
+#nav-tabContent .faculty-attributes h4{
+	color: #364697;
+}
+
+#nav-tabContent .faculty-attributes h3{
+	color: #131311;
+}
+
+
+#faculty-publication div{
+	background-color: #fdfdfd;
+	/* padding-top: 25px; */
+	padding-bottom: 15px;
+}
+
+#faculty-publication a{
+	color: #134f8e;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+#faculty-publication a:hover{
+    text-decoration: underline;
+}
+
+#faculty-publication h2{
+	color: rgb(62, 62, 180) !important;
+    border-bottom: 1px solid rgb(231, 187, 12) !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 1px !important;
+    padding-left: 9px !important;
+    text-align: center !important;
+}
+
+
+.fixed-sidebar {
+	position: fixed;
+	width: calc(200px + 5vw);
+}
+
+/*Start*/
+
+#faculty-experience h2 {
+    color: rgb(62, 62, 180) !important;
+    border-bottom: 1px solid rgb(231, 187, 12) !important;
+    padding-bottom: 10px !important; /* Increase space between text and border */
+    margin-bottom: 1px !important; /* Increase space between elements */
+    padding-left: 9px !important; /* Start text from the right */
+	text-align: center !important;
+}
+body {
+    
+    font-family: 'Arial', sans-serif !important;
+}
+
+#faculty-experience .publication-list{
+	font-family: 'Roboto', sans-serif;
+}
+
+.section-header {
+    font-size: 2rem !important;
+    color: #333333 !important;
+    text-align: left !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.publication-list {
+    padding: 0 !important;
+	box-shadow: none !important;
+	
+}
+
+.publication-item {
+	justify-content: space-between !important;
+    font-size: 16px !important;
+    color: #2a2a2a !important;
+    margin-bottom: 0.3rem !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    transition: transform 0.3s ease, background-color 0.3s ease !important;
+}
+
+
+
+.publication-item.odd {
+    background-color: #f7f7f7!important;
+	padding-top: 20px !important;
+	padding-bottom: 5px !important;
+	margin-left: 1px !important;
+}
+
+.publication-item.even {
+	background-color: #fff !important;
+	padding-top: 20px !important;
+	padding-bottom: 5px !important;
+	margin-left: 1px !important;
+}
+
+.publication-item:hover {
+    transform: translateY(-5px) !important;
+    background-color: #f1f1f1 !important;
+}
+
+
+/*End*/
+
+@media (max-width: 992px){
+	.fixed-sidebar{
+		position: static;
+		width: 100%;
+		height: 100%;
+	}
+
+	#faculty-image-bio .fixed-sidebar img{
+		width: calc(200px + 10vw);
+	}
+}
+
+
+@media (min-width: 992px){
+	.fixed-sidebar{
+		position: fixed;
+		width: calc(200px + 3vw);
+	}
+
+	#faculty-image-bio .fixed-sidebar img{
+		width: 100%;
+	}
+}
+
+
+/*Table Experience Awards Starts*/
+
+#faculty-experience table, #faculty-awards table{
+	border-radius: 5px;
+	overflow: hidden; /* This ensures the rounded corners are visible */
+	table-layout: auto;
+  }
+
+.table-custom {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	margin-top: 15px;
+  }
+  .table-custom th,
+  .table-custom td {
+	vertical-align: middle !important;
+	text-align: center;
+	padding: 12px 15px;
+  }
+  .table-custom thead th {
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .table-custom td{
+	border-width: 0px 3px 0px 0px; /* top right bottom left */
+  	border-style: solid solid solid solid; /* top right bottom left */
+	border-color: red rgb(192, 192, 188, 0.3) blue yellow;
+  }
+  .table-custom tbody tr:nth-child(odd){
+	background-color: #b73e3e;
+  }
+  .table-custom tbody tr:nth-child(even){
+	background-color: #e9ecef;
+  }
+  .table-custom tbody tr{
+	transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .table-custom tbody tr:hover{
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+	background-color: #f1f1f1;
+	cursor: text;
+	transform: scale(1.01);
+	transition: all 0.2s ease-in-out;
+	transform: translateY(-2px) !important;
+  }
+/*Table Experience Ends*/
+
+
+/*Fixed Sidebar Starts*/
+
+body {
+	padding-top: 110px; /* Adjust body padding to accommodate fixed navbar */
+	
+  }
+  .container-fluid {
+	overflow-x: hidden; /* Hide horizontal overflow */
+  }
+  .left-column {
+	position: sticky; /* Ensures left column sticks when scrolling */
+	top: 110px; /* Height of fixed navbar */
+	height: calc(100vh - 110px); /* Remaining viewport height */
+	overflow-y: auto; /* Enable vertical scrolling */
+	padding: 20px;
+	border-right: 1px solid #e9ecef; /* Border for separation */
+	box-shadow: 1px 0 5px -2px rgba(0, 0, 0, 0.1);
+	
+  }
+  .left-column.scrollable {
+	position: static; /* Reset position to static for small screens */
+	height: auto; /* Allow height to adjust based on content */
+	overflow-y: visible; /* Enable natural scrolling behavior */
+  }
+  .left-column .profile-image {
+	width: 100%;
+	border-radius: 50%;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2); /* Stronger shadow for a 3D effect */
+    border: 5px solid #fff; /* Thicker white border around the image */
+	transition: transform 0.3s ease-in-out;
+  }
+
+
+  
+  @media (max-width: 992px) {
+	.left-column{
+		position: static;
+		height: auto !important;
+	}
+	.left-column .profile-image {
+	  border-radius: 0; /* Remove rounded border on smaller screens */
+	  width: auto !important;
+	}
+  }
+
+  
+
+  .left-column .profile-image:hover {
+	transform: scale(1.1); /* Scale up on hover */
+  }
+  .profile-info {
+	margin-top: 20px;
+  }
+  .profile-info h3 {
+	font-size: 1.5em;
+	margin-bottom: 15px;
+	color: #0d1370;
+	word-wrap: break-word; /* Ensure long words break and wrap to the next line */
+    overflow-wrap: break-word; /* The newer, preferred property for word breaking */
+    white-space: normal;
+  }
+
+  .designation-p{
+	font-size: 1.15em;
+	margin-bottom: 10px;
+	color: #34495e;
+	word-wrap: break-word; /* Ensure long words break and wrap to the next line */
+    overflow-wrap: break-word; /* The newer, preferred property for word breaking */
+    white-space: normal;
+  }
+
+  .dept-p{
+	font-size: 1em;
+	margin-bottom: 12px;
+    color: #34495e;
+	word-wrap: break-word; /* Ensure long words break and wrap to the next line */
+    overflow-wrap: break-word; /* The newer, preferred property for word breaking */
+    white-space: normal;
+  }
+
+  .phone-p{
+	font-size: 1em;
+    color: rgb(0, 0, 0);
+	word-wrap: break-word; /* Ensure long words break and wrap to the next line */
+    overflow-wrap: break-word; /* The newer, preferred property for word breaking */
+    white-space: normal;
+  }
+
+  .email-p{
+	font-size: 1em;
+    color: rgb(0, 0, 0);
+	margin-top: -20px;
+  }
+
+  .profile-info a {
+	color: #134f8e; /* Blue color for links */
+	text-decoration: none;
+	transition: color 0.3s ease-in-out;
+  }
+  .profile-info a:hover {
+	color: #0056b3; /* Darker blue on hover */
+	text-decoration: underline;
+  }
+  .right-column {
+	overflow-y: auto; /* Enable vertical scrolling */
+	padding: 20px;
+  }
+  .publications-list {
+	max-height: calc(100vh - 110px - 40px); /* Adjust height for scroll */
+	overflow-y: auto; /* Enable vertical scrolling */
+  }
+/*Fixed Sidebar Ends*/
+
+
+/*container Starts*/
+.abs-position{
+	position: absolute; left: 50%; 
+	transform: translateX(-50%); 
+	
+}
+
+.top-left-border{
+	border-left: 2px solid #ebebeb; 
+	border-top: 1px solid #ebebeb;
+	border-radius: 10px;
+	box-shadow: -2px 0 5px -2px rgba(0, 0, 0, 0.1);
+}
+/*Container Ends*/
+
+
+/*Research Section Starts*/
+.research-profile {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: none !important;
+    max-width: 600px;
+    margin: auto;
+	text-align: center;
+}
+
+.research-heading {
+    font-size: 2rem;
+    color: rgb(62, 62, 180) !important;
+    border-bottom: 1px solid rgb(231, 187, 12) !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 1px !important;
+    padding-left: 9px !important;
+}
+
+.research-interests {
+    font-size: 16px;
+    color: #020b15;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: none !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.research-interests:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#faculty-research-interest h2{
+	color: rgb(62, 62, 180) !important;
+    border-bottom: 1px solid rgb(231, 187, 12) !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 1px !important;
+    padding-left: 9px !important;
+	text-align: center !important;
+}
+
+
+#faculty-research-interest a{
+	color: #134f8e;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+#faculty-research-interest a:hover{
+	text-decoration: underline;
+}
+/*Research Section Ends*/
